@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4eo0lw6q2h6"]
+
+[ext_resource type="Script" path="res://Source/PlayerControls/PlayerController.cs" id="1_64w13"]
+[ext_resource type="Script" path="res://Source/PlayerControls/HumanFormController.cs" id="2_vgyiw"]
+[ext_resource type="Texture2D" uid="uid://dui3ifp56ouor" path="res://Resources/Placeholders/PlayerPlaceholder.png" id="3_ltkwn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3p0ur"]
+size = Vector2(52, 86)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t0fox"]
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("HumanForm", "BallForm")]
+script = ExtResource("1_64w13")
+HumanForm = NodePath("Human")
+BallForm = NodePath("Ball")
+
+[node name="Human" type="CharacterBody2D" parent="."]
+script = ExtResource("2_vgyiw")
+Acceleration = 1000.0
+Friction = 8000.0
+AirFriction = 20.0
+MaxSpeed = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Human"]
+position = Vector2(0, -44)
+shape = SubResource("RectangleShape2D_3p0ur")
+
+[node name="Sprite2D" type="Sprite2D" parent="Human"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(0, -52)
+scale = Vector2(3.25, 3.25)
+texture = ExtResource("3_ltkwn")
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("CircleShape2D_t0fox")
